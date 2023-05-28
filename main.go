@@ -138,13 +138,15 @@ func listService(tx *sql.Tx) {
 	}
 	defer rows.Close()
 
+	fmt.Println("ID\tNama\t\t\tNo. HP")
+
 	for rows.Next() {
 		var service entity.Service
 		err := rows.Scan(&service.ID, &service.Name, &service.Price)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("ID: %d, Nama: %s, No. HP: %.2f\n", service.ID, service.Name, service.Price)
+		fmt.Printf("%d\t%s  \t%.2f\n", service.ID, service.Name, service.Price)
 	}
 
 	err = rows.Err()
@@ -170,6 +172,8 @@ func listTransaction(tx *sql.Tx) {
 	}
 	defer rows.Close()
 
+	fmt.Println("ID\tPelanggan\tLayanan\t\t\tTanggal Masuk\t\tTanggal Selesai\t\tDiterima Oleh\tJumlah\tHarga\tTotal Harga")
+
 	for rows.Next() {
 		var transaction entity.Transaction
 		var customer entity.Customer
@@ -178,7 +182,7 @@ func listTransaction(tx *sql.Tx) {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("ID: %d, Pelanggan: %s, Layanan: %s, Tanggal Masuk: %s, Tanggal Selesai: %s, Diterima Oleh: %s, Jumlah: %d %s, Harga: %.2f, Total Harga: %.2f\n",
+		fmt.Printf("%d\t%s\t\t%s  \t%s\t%s\t%s\t%d %s\t%.2f \t%.2f\n",
 		transaction.Transaction_Id, customer.Name, service.Name, transaction.Transaction_In, transaction.Transaction_Done, transaction.Received_By, transaction.Quantity, transaction.Unit, transaction.Price, transaction.Total_Price)
 	}
 
@@ -241,13 +245,15 @@ func listCustomer(tx *sql.Tx) {
 	}
 	defer rows.Close()
 
+	fmt.Println("ID\tName\t\tPhone")
+
 	for rows.Next() {
 		var customer entity.Customer
 		err := rows.Scan(&customer.ID, &customer.Name, &customer.Phone)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("ID: %s, Nama: %s, No. HP: %s\n", customer.ID, customer.Name, customer.Phone)
+		fmt.Printf("%s\t%s \t\t%s\n", customer.ID, customer.Name, customer.Phone)
 	}
 
 	err = rows.Err()
