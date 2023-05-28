@@ -138,7 +138,7 @@ func listService(tx *sql.Tx) {
 	}
 	defer rows.Close()
 
-	fmt.Println("ID\tNama\t\t\tNo. HP")
+	fmt.Println("ID\tNama\t\t\tHarga")
 
 	for rows.Next() {
 		var service entity.Service
@@ -245,7 +245,7 @@ func listCustomer(tx *sql.Tx) {
 	}
 	defer rows.Close()
 
-	fmt.Println("ID\tName\t\tPhone")
+	fmt.Println("ID\tNama\t\tNo. HP")
 
 	for rows.Next() {
 		var customer entity.Customer
